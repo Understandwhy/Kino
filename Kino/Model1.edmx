@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model1" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FILM">
+          <Key>
+            <PropertyRef Name="Id_film" />
+          </Key>
+          <Property Name="Id_film" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_film" Type="nvarchar(max)" />
+          <Property Name="zanr" Type="nvarchar" MaxLength="50" />
+          <Property Name="reiting" Type="float" />
+          <Property Name="time_film" Type="int" />
+          <Property Name="reziser" Type="nvarchar" MaxLength="50" />
+          <Property Name="opisaniey_film" Type="nvarchar(max)" />
+          <Property Name="year_vipuska" Type="int" />
+          <Property Name="photo" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="POKUPKA_BILETA">
+          <Key>
+            <PropertyRef Name="Id_bilet" />
+          </Key>
+          <Property Name="Id_bilet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="data_time_pokup" Type="datetime" />
+          <Property Name="price" Type="int" />
+          <Property Name="Id_film" Type="int" />
+          <Property Name="Id_zal" Type="int" />
+          <Property Name="Id_user" Type="int" />
+          <Property Name="mesto" Type="int" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_user" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname_user" Type="nvarchar" MaxLength="50" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_bilet" Type="int" />
+          <Property Name="data_bith" Type="date" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" />
+          <Property Name="parol" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="USER_HISTIRY">
+          <Key>
+            <PropertyRef Name="Id_histiry" />
+          </Key>
+          <Property Name="Id_histiry" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="time_VHOD" Type="datetime" />
+          <Property Name="time_VIHOD" Type="datetime" />
+          <Property Name="Id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="ZAL">
+          <Key>
+            <PropertyRef Name="Id_zal" />
+          </Key>
+          <Property Name="Id_zal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kolvo_mest" Type="int" />
+          <Property Name="tip_zal" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_POKUPKA_BILETA_ToTable">
+          <End Role="FILM" Type="Self.FILM" Multiplicity="0..1" />
+          <End Role="POKUPKA_BILETA" Type="Self.POKUPKA_BILETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="Id_film" />
+            </Principal>
+            <Dependent Role="POKUPKA_BILETA">
+              <PropertyRef Name="Id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POKUPKA_BILETA_ToTable_1">
+          <End Role="ZAL" Type="Self.ZAL" Multiplicity="0..1" />
+          <End Role="POKUPKA_BILETA" Type="Self.POKUPKA_BILETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZAL">
+              <PropertyRef Name="Id_zal" />
+            </Principal>
+            <Dependent Role="POKUPKA_BILETA">
+              <PropertyRef Name="Id_zal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POKUPKA_BILETA_ToTable_2">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="POKUPKA_BILETA" Type="Self.POKUPKA_BILETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="POKUPKA_BILETA">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_HISTIRY_ToTable">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="USER_HISTIRY" Type="Self.USER_HISTIRY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="USER_HISTIRY">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Model1Container">
+          <EntitySet Name="FILM" EntityType="Self.FILM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POKUPKA_BILETA" EntityType="Self.POKUPKA_BILETA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_HISTIRY" EntityType="Self.USER_HISTIRY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZAL" EntityType="Self.ZAL" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_POKUPKA_BILETA_ToTable" Association="Self.FK_POKUPKA_BILETA_ToTable">
+            <End Role="FILM" EntitySet="FILM" />
+            <End Role="POKUPKA_BILETA" EntitySet="POKUPKA_BILETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POKUPKA_BILETA_ToTable_1" Association="Self.FK_POKUPKA_BILETA_ToTable_1">
+            <End Role="ZAL" EntitySet="ZAL" />
+            <End Role="POKUPKA_BILETA" EntitySet="POKUPKA_BILETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POKUPKA_BILETA_ToTable_2" Association="Self.FK_POKUPKA_BILETA_ToTable_2">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="POKUPKA_BILETA" EntitySet="POKUPKA_BILETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_HISTIRY_ToTable" Association="Self.FK_USER_HISTIRY_ToTable">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="USER_HISTIRY" EntitySet="USER_HISTIRY" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FILM">
+          <Key>
+            <PropertyRef Name="Id_film" />
+          </Key>
+          <Property Name="Id_film" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_film" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="zanr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reiting" Type="Double" />
+          <Property Name="time_film" Type="Int32" />
+          <Property Name="reziser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opisaniey_film" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="year_vipuska" Type="Int32" />
+          <NavigationProperty Name="POKUPKA_BILETA" Relationship="Self.FK_POKUPKA_BILETA_ToTable" FromRole="FILM" ToRole="POKUPKA_BILETA" />
+          <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="POKUPKA_BILETA">
+          <Key>
+            <PropertyRef Name="Id_bilet" />
+          </Key>
+          <Property Name="Id_bilet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data_time_pokup" Type="DateTime" Precision="3" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="Id_film" Type="Int32" />
+          <Property Name="Id_zal" Type="Int32" />
+          <Property Name="Id_user" Type="Int32" />
+          <Property Name="mesto" Type="Int32" />
+          <NavigationProperty Name="FILM" Relationship="Self.FK_POKUPKA_BILETA_ToTable" FromRole="POKUPKA_BILETA" ToRole="FILM" />
+          <NavigationProperty Name="ZAL" Relationship="Self.FK_POKUPKA_BILETA_ToTable_1" FromRole="POKUPKA_BILETA" ToRole="ZAL" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_POKUPKA_BILETA_ToTable_2" FromRole="POKUPKA_BILETA" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="Id_user" />
+          </Key>
+          <Property Name="Id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_bilet" Type="Int32" />
+          <Property Name="data_bith" Type="DateTime" Precision="0" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="parol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="POKUPKA_BILETA" Relationship="Self.FK_POKUPKA_BILETA_ToTable_2" FromRole="USER" ToRole="POKUPKA_BILETA" />
+          <NavigationProperty Name="USER_HISTIRY" Relationship="Self.FK_USER_HISTIRY_ToTable" FromRole="USER" ToRole="USER_HISTIRY" />
+        </EntityType>
+        <EntityType Name="USER_HISTIRY">
+          <Key>
+            <PropertyRef Name="Id_histiry" />
+          </Key>
+          <Property Name="Id_histiry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="time_VHOD" Type="DateTime" Precision="3" />
+          <Property Name="time_VIHOD" Type="DateTime" Precision="3" />
+          <Property Name="Id_user" Type="Int32" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USER_HISTIRY_ToTable" FromRole="USER_HISTIRY" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="ZAL">
+          <Key>
+            <PropertyRef Name="Id_zal" />
+          </Key>
+          <Property Name="Id_zal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kolvo_mest" Type="Int32" />
+          <Property Name="tip_zal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="POKUPKA_BILETA" Relationship="Self.FK_POKUPKA_BILETA_ToTable_1" FromRole="ZAL" ToRole="POKUPKA_BILETA" />
+        </EntityType>
+        <Association Name="FK_POKUPKA_BILETA_ToTable">
+          <End Role="FILM" Type="Self.FILM" Multiplicity="0..1" />
+          <End Role="POKUPKA_BILETA" Type="Self.POKUPKA_BILETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FILM">
+              <PropertyRef Name="Id_film" />
+            </Principal>
+            <Dependent Role="POKUPKA_BILETA">
+              <PropertyRef Name="Id_film" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POKUPKA_BILETA_ToTable_1">
+          <End Role="ZAL" Type="Self.ZAL" Multiplicity="0..1" />
+          <End Role="POKUPKA_BILETA" Type="Self.POKUPKA_BILETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZAL">
+              <PropertyRef Name="Id_zal" />
+            </Principal>
+            <Dependent Role="POKUPKA_BILETA">
+              <PropertyRef Name="Id_zal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POKUPKA_BILETA_ToTable_2">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="POKUPKA_BILETA" Type="Self.POKUPKA_BILETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="POKUPKA_BILETA">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_HISTIRY_ToTable">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="USER_HISTIRY" Type="Self.USER_HISTIRY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="Id_user" />
+            </Principal>
+            <Dependent Role="USER_HISTIRY">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FILM" EntityType="Self.FILM" />
+          <EntitySet Name="POKUPKA_BILETA" EntityType="Self.POKUPKA_BILETA" />
+          <EntitySet Name="USER" EntityType="Self.USER" />
+          <EntitySet Name="USER_HISTIRY" EntityType="Self.USER_HISTIRY" />
+          <EntitySet Name="ZAL" EntityType="Self.ZAL" />
+          <AssociationSet Name="FK_POKUPKA_BILETA_ToTable" Association="Self.FK_POKUPKA_BILETA_ToTable">
+            <End Role="FILM" EntitySet="FILM" />
+            <End Role="POKUPKA_BILETA" EntitySet="POKUPKA_BILETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POKUPKA_BILETA_ToTable_1" Association="Self.FK_POKUPKA_BILETA_ToTable_1">
+            <End Role="ZAL" EntitySet="ZAL" />
+            <End Role="POKUPKA_BILETA" EntitySet="POKUPKA_BILETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POKUPKA_BILETA_ToTable_2" Association="Self.FK_POKUPKA_BILETA_ToTable_2">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="POKUPKA_BILETA" EntitySet="POKUPKA_BILETA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_HISTIRY_ToTable" Association="Self.FK_USER_HISTIRY_ToTable">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="USER_HISTIRY" EntitySet="USER_HISTIRY" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Model1Container" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="FILM">
+            <EntityTypeMapping TypeName="Model1.FILM">
+              <MappingFragment StoreEntitySet="FILM">
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="Id_film" ColumnName="Id_film" />
+                <ScalarProperty Name="name_film" ColumnName="name_film" />
+                <ScalarProperty Name="zanr" ColumnName="zanr" />
+                <ScalarProperty Name="reiting" ColumnName="reiting" />
+                <ScalarProperty Name="time_film" ColumnName="time_film" />
+                <ScalarProperty Name="reziser" ColumnName="reziser" />
+                <ScalarProperty Name="opisaniey_film" ColumnName="opisaniey_film" />
+                <ScalarProperty Name="year_vipuska" ColumnName="year_vipuska" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POKUPKA_BILETA">
+            <EntityTypeMapping TypeName="Model1.POKUPKA_BILETA">
+              <MappingFragment StoreEntitySet="POKUPKA_BILETA">
+                <ScalarProperty Name="Id_bilet" ColumnName="Id_bilet" />
+                <ScalarProperty Name="data_time_pokup" ColumnName="data_time_pokup" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Id_film" ColumnName="Id_film" />
+                <ScalarProperty Name="Id_zal" ColumnName="Id_zal" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="mesto" ColumnName="mesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER">
+            <EntityTypeMapping TypeName="Model1.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="name_user" ColumnName="name_user" />
+                <ScalarProperty Name="surname_user" ColumnName="surname_user" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="Id_bilet" ColumnName="Id_bilet" />
+                <ScalarProperty Name="data_bith" ColumnName="data_bith" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="parol" ColumnName="parol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_HISTIRY">
+            <EntityTypeMapping TypeName="Model1.USER_HISTIRY">
+              <MappingFragment StoreEntitySet="USER_HISTIRY">
+                <ScalarProperty Name="Id_histiry" ColumnName="Id_histiry" />
+                <ScalarProperty Name="time_VHOD" ColumnName="time_VHOD" />
+                <ScalarProperty Name="time_VIHOD" ColumnName="time_VIHOD" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZAL">
+            <EntityTypeMapping TypeName="Model1.ZAL">
+              <MappingFragment StoreEntitySet="ZAL">
+                <ScalarProperty Name="Id_zal" ColumnName="Id_zal" />
+                <ScalarProperty Name="kolvo_mest" ColumnName="kolvo_mest" />
+                <ScalarProperty Name="tip_zal" ColumnName="tip_zal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

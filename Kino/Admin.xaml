@@ -1,0 +1,21 @@
+﻿<Window x:Class="Kino.Admin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kino"
+        mc:Ignorable="d"
+        Title="Admin" Height="390" Width="500">
+    <Grid HorizontalAlignment="Center" Width="480" Margin="0,10,0,7" Background="#FBF7F4">
+        <Label Margin="10,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Специально для Администраторов!" FontSize="24" FontWeight="Bold" Foreground="#e25121" />
+
+        <!-- Кнопки для администратора -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="Film" Content="Просмотр со стороны пользователя"  Background="#C22719" Foreground="#FBF7F4" Margin="0,10" FontFamily="Bahnschrift" FontSize="18" Width="307" Click="Film_Click" />
+            <Button x:Name="B_Redact" Content="Редактировать фильмы"  Background="#C22719" Foreground="#FBF7F4" FontFamily="Bahnschrift" FontSize="18" Width="305" Click="B_Redact_Click"/>
+            <Button x:Name="B_Stori" Content="История"  Background="#C22719" Foreground="#FBF7F4" Margin="0,10" FontFamily="Bahnschrift" FontSize="18" Height="28" Click="B_Stori_Click"/>
+            <Button x:Name="B_Lichn" Content="Личные данные"  Background="#C22719" Foreground="#FBF7F4" FontFamily="Bahnschrift" FontSize="18" Click="B_Lichn_Click"/>
+            <Button x:Name="B_back" Content="Назад" Background="#C22719" Foreground="#FBF7F4" Margin="0,10" FontFamily="Bahnschrift" FontSize="18" Click="B_back_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

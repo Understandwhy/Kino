@@ -1,0 +1,74 @@
+﻿<Window x:Class="Kino.Film"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kino"
+        mc:Ignorable="d"
+        Title="Фильмы" Height="500" Width="830" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,-105">
+        <Grid Background="#FFFBF7F4" Margin="0,0,-10,53" RenderTransformOrigin="0.5,0.507">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="763*"/>
+                <ColumnDefinition Width="47*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="tx_poisk" TextWrapping="Wrap" VerticalAlignment="Top"  Margin="10,10,10,0" Height="22" FontFamily="Bahnschrift" FontSize="18" TextChanged="tx_poisk_TextChanged_1"/>
+            <ComboBox x:Name="cmb_poisk" VerticalAlignment="Top" Margin="10,34,599,0" FontFamily="Bahnschrift" FontSize="18" Height="25" SelectionChanged="cmb_poisk_SelectionChanged"/>
+            <Grid HorizontalAlignment="Right" Height="16" VerticalAlignment="Top" Width="170" Margin="0,43,51,0">
+                <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Всего: " FontFamily="Bahnschrift" FontSize="18" Margin="-18,-8,0,0" Width="55" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.109"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock x:Name="tx_vsego"  HorizontalAlignment="Left" Margin="44,-5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="26"><Run Language="ru-ru" Text="_"/></TextBlock>
+            </Grid>
+            <Grid HorizontalAlignment="Right" Height="16" VerticalAlignment="Top" Width="170" Margin="0,43,382,0">
+                <TextBlock x:Name="tx_naideno"  HorizontalAlignment="Left" Margin="49,-3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="18"><Run Language="ru-ru" Text="_"/></TextBlock>
+                <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="18" RenderTransformOrigin="0.471,0.446" Width="85" Margin="-36,-6,0,0"><Run Language="ru-ru" Text="Найдено"/><Run Text=": "/></TextBlock>
+            </Grid>
+            <ListView    x:Name="lstView" d:ItemsSource="{d:SampleData ItemCount=2}" Margin="10,67,0,67" UseLayoutRounding="False" SelectedIndex="0" IsSynchronizedWithCurrentItem="False" SelectionMode="Single" Grid.ColumnSpan="2">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="IsSelected" Value="True"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <Grid Height="199" Width="770" >
+                            <Button Background="#FFC22719" BorderBrush="White" Foreground="White"  x:Name="kupit" Margin="618,7,0,0" Content="Купить билет" Height="24" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Click="kupit_Click"/>
+                            <Button Background="#FFC22719" BorderBrush="White" Foreground="White"  x:Name="redactirovat" Margin="618,36,0,0" Content="Редактировать" Height="24" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Click="redactirovat_Click"/>
+                            <Button Background="#FFC22719" BorderBrush="White" Foreground="White"  x:Name="delete" Margin="618,70,0,0" Content="Удалить" Height="24" VerticalAlignment="Top" Click="delete_Click" FontSize="18" FontFamily="Bahnschrift"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="140,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" Text="Фильм"/><Run Text=":"/></TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" Text="Время просмотра"/><Run Text=":"/></TextBlock>
+
+                            <TextBlock HorizontalAlignment="Left" Margin="166,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text=""/><Run Language="ru-ru" Text=""/><Run Text=":"/></TextBlock>
+                            <Image Grid.Column="0" Source="{Binding Photo}"  Margin="10,8,635,63" Height="128" Width="125"/>
+
+                            <TextBlock  Text="{Binding name_film}" HorizontalAlignment="Left" Margin="199,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" /></TextBlock>
+                            <TextBlock  Text="{Binding zanr}" Margin="199,26,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" Width="252" Height="17" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" /></TextBlock>
+                            <TextBlock  Text="{Binding reiting}" Margin="209,44,0,0" TextWrapping="Wrap" Width="242" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" /></TextBlock>
+                            <TextBlock  Text="{Binding reziser}" Margin="221,63,0,0" TextWrapping="Wrap" Width="242" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" /></TextBlock>
+                            <TextBlock  Text="{Binding opisaniey_film}" Margin="220,80,0,0" TextWrapping="Wrap" Width="383" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" /></TextBlock>
+
+                            <TextBlock Text="{Binding time_film}" HorizontalAlignment="Left" Margin="147,141,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="69" FontFamily="Bahnschrift" FontSize="16" />
+                            <TextBlock HorizontalAlignment="Left" Margin="140,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" Text="Жанр"/><Run Text=":"/></TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Margin="140,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" Text="Рейтинг"/><Run Text=":"/></TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Margin="140,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16" RenderTransformOrigin="0.739,0.627"><Run Language="ru-ru" Text="Описание"/><Run Text=":"/></TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Margin="140,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="16"><Run Language="ru-ru" Text="Режиссёр"/><Run Text=":"/></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  Background="#FFC22719" BorderBrush="White" Foreground="White" x:Name="back" Content="Назад" HorizontalAlignment="Left" Width="91" Margin="694,423,0,0" Height="30" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Grid.ColumnSpan="2" Click="back_Click"/>
+        </Grid>
+    </Grid>
+</Window>

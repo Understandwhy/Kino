@@ -1,0 +1,41 @@
+﻿<Window x:Class="Kino.LichniyKabinet"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kino"
+        mc:Ignorable="d"
+        Title="LichniyKabinet" Height="600" Width="800">
+    <Grid HorizontalAlignment="Center" Width="800" Margin="0,0,0,-16" Background="#FBF7F4">
+        <Button x:Name="BAdd" Content="Добавить пользователя"  Background="#C22719" Foreground="#FBF7F4" FontSize="18" FontFamily="Bahnschrift" Margin="291,610,291,0" Height="30" VerticalAlignment="Top" Click="BAdd_Click"/>
+
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Личные данные :" FontSize="24" FontWeight="Bold" Foreground="#e25121" Margin="308,0,0,0" />
+
+        <Label Margin="53,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Имя:" Foreground="#e25121" FontSize="18" FontFamily="Bahnschrift" />
+        <TextBox x:Name="firstNameTextBox" Margin="209,50,46,0" VerticalAlignment="Top" Text="{Binding FirstName}" FontSize="18" FontFamily="Bahnschrift" />
+
+        <Label Margin="53,80,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Фамилия:" Foreground="#e25121" FontSize="18" FontFamily="Bahnschrift" />
+        <TextBox x:Name="lastNameTextBox" Margin="209,80,46,0" VerticalAlignment="Top" Text="{Binding LastName}" FontSize="18" FontFamily="Bahnschrift" />
+
+        <Label Margin="53,110,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Логин :" Foreground="#e25121" FontSize="18" FontFamily="Bahnschrift" />
+        <TextBox x:Name="emailTextBox" Margin="209,110,46,0" VerticalAlignment="Top" Text="{Binding Email}" FontSize="18" FontFamily="Bahnschrift" />
+
+        <Label Margin="53,140,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Телефон:" Foreground="#e25121" FontSize="18" FontFamily="Bahnschrift" />
+        <TextBox x:Name="phoneTextBox" Margin="209,140,46,0" VerticalAlignment="Top" Text="{Binding Phone}" FontSize="18" FontFamily="Bahnschrift" />
+
+        <Label Margin="53,308,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Зашифр. пароль:" Foreground="#e25121" FontSize="18" FontFamily="Bahnschrift" />
+        <TextBox x:Name="Shifr" Margin="209,308,46,0" VerticalAlignment="Top" Text="{Binding Phone}" FontSize="18" FontFamily="Bahnschrift" Height="33" />
+
+        <Label Margin="53,170,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Дата рождения:" Foreground="#e25121" FontSize="18" FontFamily="Bahnschrift" />
+        <DatePicker x:Name="dateOfBirthPicker" Margin="209,170,46,0" VerticalAlignment="Top" SelectedDate="{Binding DateOfBirth}" FontSize="18" FontFamily="Bahnschrift" />
+        <Button x:Name="Bsave" Content="Сохранить изменения"  Background="#C22719" Foreground="#FBF7F4" FontSize="18" FontFamily="Bahnschrift" Margin="412,499,182,0" Click="Bsave_Click" Height="30" VerticalAlignment="Top"/>
+        <Button x:Name="BClear" Content="Очистить поля"  Background="#C22719" Foreground="#FBF7F4" FontSize="18" FontFamily="Bahnschrift" Margin="194,499,400,0" Height="30" VerticalAlignment="Top" Click="BClear_Click"/>
+        <Button x:Name="Bback" Content="Назад" Background="#C22719" Foreground="#FBF7F4" Margin="696,499,11,0" FontSize="18" FontFamily="Bahnschrift" Height="30" VerticalAlignment="Top" Click="Bback_Click"/>
+        <Button x:Name="Bdelete" Content="Удалить" Background="#C22719" Foreground="#FBF7F4" Margin="11,499,696,0" FontSize="18" FontFamily="Bahnschrift" Height="30" VerticalAlignment="Top" Click="Bdelete_Click"/>
+        <ListBox x:Name="LbPOlz" HorizontalAlignment="Center" Height="148" Margin="0,346,0,0" VerticalAlignment="Top" Width="778" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="LbPOlz_SelectionChanged" />
+        <ComboBox x:Name="Rol" HorizontalAlignment="Left" Margin="209,207,0,0" VerticalAlignment="Top" Width="545" Height="24" FontSize="18" FontFamily="Bahnschrift"/>
+        <Label Margin="53,274,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Пароль :" Foreground="#e25121" FontSize="18" FontFamily="Bahnschrift" />
+        <Label Margin="54,207,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Роль :" Foreground="#e25121" FontSize="18" FontFamily="Bahnschrift" />
+        <TextBox x:Name="NewParol" HorizontalAlignment="Left" Height="29" Margin="209,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="545" FontSize="18" FontFamily="Bahnschrift"/>
+    </Grid>
+</Window>
